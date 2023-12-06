@@ -20,7 +20,7 @@ const HomeScreen = () => {
     });
   }, []);
   return (
-    <SafeAreaView className="bg-white pt-5">
+    <SafeAreaView className="bg-white py-5">
       {/* Header */}
       <View className="flex-row pb-3 items-center mx-4 space-x-2">
         <Image
@@ -60,19 +60,21 @@ const HomeScreen = () => {
 
         {/* Featured */}
         <FeaturedRow
+          id="1"
           title="Featured"
-          description="Paid promotions"
-          featuredCategory="featured"
+          description="Today's sponsored restaurants"
         />
+        {/* Discounts */}
         <FeaturedRow
-          title="Featured"
-          description="Paid promotions"
-          featuredCategory="featured"
+          id="2"
+          title="Discounts"
+          description="Special discounts for you to enjoy!"
         />
+        {/* Near you */}
         <FeaturedRow
-          title="Featured"
-          description="Paid promotions"
-          featuredCategory="featured"
+          id="3"
+          title="Near you"
+          description="Check out these restaurants nearby!"
         />
       </ScrollView>
     </SafeAreaView>
