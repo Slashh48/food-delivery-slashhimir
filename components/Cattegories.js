@@ -1,11 +1,25 @@
 import { ScrollView, Text, Image } from "react-native";
 import CatCard from "./CatCard";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Hezu from "../images/jesus.png";
+import createClient, { urlFor } from "../sanity";
 
 const HezuKristo = Image.resolveAssetSource(Hezu).uri;
 
 const Cattegories = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    createClient
+      .fetch(
+        `
+    *[_type == "category"]
+    `
+      )
+      .then((data) => {
+        setCategories(data);
+      });
+  }, []);
   return (
     <ScrollView
       contentContainerStyle={{
@@ -16,12 +30,14 @@ const Cattegories = () => {
       showsHorizontalScrollIndicator={false}
     >
       {/* Category card */}
-      <CatCard imgUrl={HezuKristo} title="Test1" />
-      <CatCard imgUrl={HezuKristo} title="Test2" />
-      <CatCard imgUrl={HezuKristo} title="Test3" />
-      <CatCard imgUrl={HezuKristo} title="Test3" />
-      <CatCard imgUrl={HezuKristo} title="Test3" />
-      <CatCard imgUrl={HezuKristo} title="Test3" />
+
+      {categories.map((category) => (
+        <CatCard
+          key={category._id}
+          imgUrl={urlFor(category.image).width(200).url()}
+          title={category.name}
+        />
+      ))}
     </ScrollView>
   );
 };
