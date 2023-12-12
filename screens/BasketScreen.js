@@ -27,9 +27,9 @@ const BasketScreen = () => {
       return results;
     }, {});
     setGroupedItemsInBasket(groupedItems);
+    if (items.length === 0) navigation.navigate("Home");
   }, [items]);
 
-  if (items.length === 0) navigation.navigate("Home");
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 bg-gray-100">
